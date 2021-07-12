@@ -25,7 +25,7 @@ if numbers:
 
 lineEdited = " ".join(lineSplit)
 
-print("", f"Ваша рядок: {line}", "", f"Відредагований рядок: {lineEdited}", "", sep="\n")
+print("", f"Ваш рядок: {line}", "", f"Відредагований рядок: {lineEdited}", "", sep="\n")
 
 if numbers:
     print(
