@@ -1,60 +1,39 @@
-string = str(input("\nWrite: \n"))
-print("\ntext:", string)
-finalString = ""
-num = []
-maxInt = 0
-Numbers = []
+line = input("Введіть рядок: ")
+lineSplit = line.split()
+numbers = []
 
-flag = False
-for letter in string:
-    if letter.isdigit():
-        if flag:
-            num[len(num) - 1] += str(letter)
-        else:
-            num.append(letter)
-        flag = True
-    else:
-        flag = False
+i = 0
+while i < len(lineSplit):
+    if lineSplit[i].isdecimal():
+        numbers.append(int(lineSplit.pop(i)))
+        continue
+    digits = "".join(filter(lambda i: i.isdecimal(), lineSplit[i]))
+    if digits:
+        numbers.append(int(digits))
+        lineSplit[i] = "".join(filter(lambda i: not i.isdecimal(), lineSplit[i]))
+    i += 1
 
-num = [int(x) for x in num]
+lineSplit = list(map(lambda item: item.title()[:-1] + item[-1].upper(), lineSplit))
 
-string = string.replace('0', '')
-string = string.replace('1', '')
-string = string.replace('2', '')
-string = string.replace('3', '')
-string = string.replace('4', '')
-string = string.replace('5', '')
-string = string.replace('6', '')
-string = string.replace('7', '')
-string = string.replace('8', '')
-string = string.replace('9', '')
-print("removed numbers:", string, num)
+maxNumber = 0
+numbersPowered = list()
+if numbers:
+    maxNumber = max(numbers)
+    numbersPowered = list(
+        map(lambda x: x ** numbers.index(x) if x != maxNumber else x, numbers)
+    )
 
-dst = string.split(' ')
+lineEdited = " ".join(lineSplit)
 
+print("", f"Ваша рядок: {line}", "", f"Відредагований рядок: {lineEdited}", "", sep="\n")
 
+if numbers:
+    print(
+        f"Числа: {numbers}",
+        "",
+        f"Максимальне число: {maxNumber}",
+        "",
+        f"Числа після редагування: {numbersPowered}",
+        sep="\n",
+    )
 
-for word in dst:
-    if word:
-        word = str(word).upper()[0] + word[1:]
-        word = word[:len(word) - 1] + str(word).upper()[len(word) - 1]
-        finalString += word + ' '
-
-print()
-print("final string:", finalString)
-
-
-maxInt = max(num)
-print("\nMax number is", maxInt)
-
-
-
-for i in range(len(num)):
-    if num[i] != maxInt:
-        Numbers.append(int(num[i]) ** i)
-    else:
-        Numbers.append(num[i])
-
-
-print("final numbers array:", Numbers)
-print("\n\n")
