@@ -1,3 +1,11 @@
+string = str(input("\nWrite: \n"))
+print("\ntext:", string)
+finalString = ""
+num = []
+maxInt = 0
+Numbers = []
+
+flag = False
 for letter in string:
     if letter.isdigit():
         if flag:
